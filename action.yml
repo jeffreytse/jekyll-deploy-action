@@ -1,0 +1,28 @@
+name: 'Jekyll Deploy Action'
+description: >
+  'A Github Action to deploy the Jekyll site conveniently for GitHub Pages'
+inputs:
+  provider:
+    description: 'The deploy provider'
+    required: true
+  token:
+    description: 'The deploy token'
+    required: false
+  repository:
+    description: 'The deploy repository'
+    required: false
+  branch:
+    description: 'The deploy branch'
+    required: false
+  jekyll_src:
+    description: 'The Jekyll website source directory'
+    required: false
+  jekyll_cfg:
+    description: 'The Jekyll website config files'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'command'
+  color: 'gray-dark'
