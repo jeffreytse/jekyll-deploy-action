@@ -1,6 +1,6 @@
 name: 'Jekyll Deploy Action'
 description: >
-  'A Github Action to deploy the Jekyll site conveniently for GitHub Pages'
+  🪂  A Github Action to deploy the Jekyll site conveniently for GitHub Pages
 inputs:
   provider:
     description: 'The deploy provider'
@@ -25,4 +25,4 @@ runs:
   image: 'Dockerfile'
 branding:
   icon: 'command'
-  color: 'gray-dark'
+  color: 'red'
