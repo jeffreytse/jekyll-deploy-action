@@ -22,7 +22,7 @@ Pages.
 
 ## Usage
 
-At First, you should configurate a github workflow file (e.g. `.github/workflows/build-jekyll.yml`) as below:
+At First, you should add a github workflow file (e.g. `.github/workflows/build-jekyll.yml`) in your repository's `master` branch as below:
 
 ```yml
 name: Build and Deploy to Github Pages
@@ -30,7 +30,7 @@ name: Build and Deploy to Github Pages
 on:
   push:
     branches:
-      - master
+      - master  # Here source code branch is `master`, it could be other branch
 
 jobs:
   build_and_deploy:
@@ -51,10 +51,10 @@ jobs:
           with:
             provider: 'github'
             auth_token: ${{ secrets.GITHUB_TOKEN }}
-            repository: ''             # default is current repository
-            branch: 'gh-pages'         # default is gh-pages for github provider
-            jekyll_src: './'           # default is root directory
-            jekyll_cfg: '_config.yml'  # default is _config.yml
+            repository: ''             # Default is current repository
+            branch: 'gh-pages'         # Default is gh-pages for github provider
+            jekyll_src: './'           # Default is root directory
+            jekyll_cfg: '_config.yml'  # Default is _config.yml
 ```
 
 To schedule a workflow, you can use the POSIX cron syntax in your workflow file. The shortest interval you can run scheduled workflows is once every 5 minutes. For example, this workflow is triggered every hour.
@@ -70,6 +70,9 @@ After this, we should provide permissions for this action to push to the `gh-pag
 - Create a [Personal Token](https://github.com/settings/tokens) with repos permissions and copy the value.
 - Go to your repository’s Settings and then switch to the Secrets tab.
 - Create a token named `GH_TOKEN` (important) using the value copied.
+
+In the end, go to your repository’s Settings and scroll down to the GitHub Pages
+ section, choose the `gh-pages` branch as your GitHub Pages source.
 
 Additionally, if you don't have the `gh-pages` branch, you can create it as below:
 
