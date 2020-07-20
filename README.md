@@ -50,7 +50,7 @@ jobs:
         - uses: jeffreytse/jekyll-deploy-action@v0.1.0
           with:
             provider: 'github'
-            auth_token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.GITHUB_TOKEN }}
             repository: ''             # Default is current repository
             branch: 'gh-pages'         # Default is gh-pages for github provider
             jekyll_src: './'           # Default is root directory
