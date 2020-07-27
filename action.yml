@@ -14,6 +14,9 @@ inputs:
   branch:
     description: 'The deploy branch'
     required: false
+  actor:
+    description: 'The github username creating the commit'
+    required: false
   jekyll_src:
     description: 'The Jekyll website source directory'
     required: false
