@@ -11,6 +11,7 @@ fi
 
 # Tell GitHub Pages not to run Jekyll
 touch .nojekyll
+[ -n "$INPUT_CNAME" ] && echo "$INPUT_CNAME" > CNAME
 
 echo "Deploying to ${REPOSITORY} on branch ${BRANCH}"
 echo "Deploying to https://${TOKEN}@github.com/${REPOSITORY}.git"

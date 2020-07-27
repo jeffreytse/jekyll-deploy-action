@@ -17,6 +17,9 @@ inputs:
   actor:
     description: 'The github username creating the commit'
     required: false
+  cname:
+    description: 'The cname to use for the site'
+    required: false
   jekyll_src:
     description: 'The Jekyll website source directory'
     required: false

@@ -55,6 +55,7 @@ jobs:
             branch: 'gh-pages'         # Default is gh-pages for github provider
             jekyll_src: './'           # Default is root directory
             jekyll_cfg: '_config.yml'  # Default is _config.yml
+            cname: ''                  # Default is to not use a cname
             actor: ''                  # Default is the GITHUB_ACTOR
 ```
 
