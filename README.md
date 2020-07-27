@@ -55,6 +55,8 @@ jobs:
             branch: 'gh-pages'         # Default is gh-pages for github provider
             jekyll_src: './'           # Default is root directory
             jekyll_cfg: '_config.yml'  # Default is _config.yml
+            cname: ''                  # Default is to not use a cname
+            actor: ''                  # Default is the GITHUB_ACTOR
 ```
 
 To schedule a workflow, you can use the POSIX cron syntax in your workflow file. The shortest interval you can run scheduled workflows is once every 5 minutes. For example, this workflow is triggered every hour.
