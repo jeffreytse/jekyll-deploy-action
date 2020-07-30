@@ -47,10 +47,10 @@ jobs:
               ${{ runner.os }}-gems-
 
         # Use GitHub Deploy Action to build and deploy to Github
-        - uses: jeffreytse/jekyll-deploy-action@v0.1.0
+        - uses: jeffreytse/jekyll-deploy-action@v0.1.1
           with:
             provider: 'github'
-            token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.GH_TOKEN }} # It's your Personal Access Token(PAT)
             repository: ''             # Default is current repository
             branch: 'gh-pages'         # Default is gh-pages for github provider
             jekyll_src: './'           # Default is root directory
