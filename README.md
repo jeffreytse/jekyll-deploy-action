@@ -35,28 +35,28 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-        # Use GitHub Actions' cache to cache dependencies on servers
-        - uses: actions/cache@v1
-          with:
-            path: vendor/bundle
-            key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-gems-
+      # Use GitHub Actions' cache to cache dependencies on servers
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
-        # Use GitHub Deploy Action to build and deploy to Github
-        - uses: jeffreytse/jekyll-deploy-action@v0.1.1
-          with:
-            provider: 'github'
-            token: ${{ secrets.GH_TOKEN }} # It's your Personal Access Token(PAT)
-            repository: ''             # Default is current repository
-            branch: 'gh-pages'         # Default is gh-pages for github provider
-            jekyll_src: './'           # Default is root directory
-            jekyll_cfg: '_config.yml'  # Default is _config.yml
-            cname: ''                  # Default is to not use a cname
-            actor: ''                  # Default is the GITHUB_ACTOR
+      # Use GitHub Deploy Action to build and deploy to Github
+      - uses: jeffreytse/jekyll-deploy-action@v0.1.1
+        with:
+          provider: 'github'
+          token: ${{ secrets.GH_TOKEN }} # It's your Personal Access Token(PAT)
+          repository: ''             # Default is current repository
+          branch: 'gh-pages'         # Default is gh-pages for github provider
+          jekyll_src: './'           # Default is root directory
+          jekyll_cfg: '_config.yml'  # Default is _config.yml
+          cname: ''                  # Default is to not use a cname
+          actor: ''                  # Default is the GITHUB_ACTOR
 ```
 
 To schedule a workflow, you can use the POSIX cron syntax in your workflow file. The shortest interval you can run scheduled workflows is once every 5 minutes. For example, this workflow is triggered every hour.
