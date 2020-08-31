@@ -14,6 +14,7 @@ RUN bundle version
 
 COPY LICENSE.txt README.md /
 
+COPY script /script
 COPY providers /providers
 COPY entrypoint.sh /
 
