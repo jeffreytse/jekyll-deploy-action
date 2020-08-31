@@ -14,6 +14,7 @@ BRANCH=${INPUT_BRANCH:=gh-pages}
 BUNDLER_VER=${INPUT_BUNDLER_VER:=>=0}
 JEKYLL_SRC=${INPUT_JEKYLL_SRC:=./}
 JEKYLL_CFG=${INPUT_JEKYLL_CFG:=./_config.yml}
+JEKYLL_BASEURL=${INPUT_JEKYLL_BASEURL:=}
 
 echo "Starting the Jekyll Deploy Action"
 
@@ -32,13 +33,18 @@ echo "Starting bundle install"
 bundle config path ${WORKING_DIR}/vendor/bundle
 bundle install
 
+# Pre-handle Jekyll baseurl
+if [ -n "${JEKYLL_BASEURL-}" ]; then
+  JEKYLL_BASEURL="--baseurl ${JEKYLL_BASEURL}"
+fi
+
 echo "Starting jekyll build"
 JEKYLL_ENV=production bundle exec jekyll build \
-  -s ${JEKYLL_SRC} \
+  ${JEKYLL_BASEURL} \
   -c ${JEKYLL_CFG} \
-  -d build
+  -d ${WORKING_DIR}/build
 
-cd build
+cd ${WORKING_DIR}/build
 
 # Check if deploy on the same repository branch
 if [[ "${PROVIDER}" == "github" ]]; then

@@ -29,6 +29,9 @@ inputs:
   jekyll_cfg:
     description: 'The Jekyll website config files'
     required: false
+  jekyll_baseurl:
+    description: 'The Jekyll website baseurl'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
