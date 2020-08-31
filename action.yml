@@ -20,6 +20,9 @@ inputs:
   cname:
     description: 'The cname to use for the site'
     required: false
+  bundler_ver:
+    description: 'The Bundler version'
+    required: false
   jekyll_src:
     description: 'The Jekyll website source directory'
     required: false
