@@ -9,6 +9,9 @@ RUN apk add --no-cache git build-base
 # Allow for timezone setting in _config.yml
 RUN apk add --update tzdata
 
+# Installing imagemagick and RMagick - required for jekyll_picture_tag
+RUN apk add --update pkgconfig imagemagick imagemagick-dev imagemagick-libs
+
 # debug
 RUN bundle version
 
