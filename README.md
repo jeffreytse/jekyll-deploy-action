@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       # Use GitHub Deploy Action to build and deploy to Github
-      - uses: jeffreytse/jekyll-deploy-action@v0.1.3
+      - uses: jeffreytse/jekyll-deploy-action@v0.1.4
         with:
           provider: 'github'
           token: ${{ secrets.GH_TOKEN }} # It's your Personal Access Token(PAT)
@@ -55,7 +55,7 @@ jobs:
           branch: 'gh-pages'         # Default is gh-pages for github provider
           jekyll_src: './'           # Default is root directory
           jekyll_cfg: '_config.yml'  # Default is _config.yml
-          jekyll_baseurl: ''         # Default is using _config.yml
+          jekyll_baseurl: ''         # Default is according to _config.yml
           bundler_ver: '>=0'         # Default is latest bundler version
           cname: ''                  # Default is to not use a cname
           actor: ''                  # Default is the GITHUB_ACTOR
