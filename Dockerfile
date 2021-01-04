@@ -1,9 +1,23 @@
-FROM ruby:2.7-alpine
+FROM ubuntu:latest
 
 LABEL version="0.0.1"
 LABEL repository="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y build-essential && \
+  apt-get install -y git && \
+  apt-get install -y imagemagick && \
+  apt-get install -y libmagickwand-dev && \
+  apt-get install -y ruby && \
+  apt-get install -y ruby-dev
+
+RUN gem install rmagick
+RUN gem install bundler
+
+# debug
+RUN bundle version
 
 RUN apk add --no-cache git build-base
 # Allow for timezone setting in _config.yml
