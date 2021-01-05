@@ -19,10 +19,6 @@ RUN gem install bundler
 # debug
 RUN bundle version
 
-RUN apt add --no-cache git build-base
-# Allow for timezone setting in _config.yml
-RUN apt add --update tzdata
-
 # Installing imagemagick and RMagick - required for jekyll_picture_tag
 RUN apt add --update pkgconfig imagemagick imagemagick-dev imagemagick-libs
 
