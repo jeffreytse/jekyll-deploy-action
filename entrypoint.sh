@@ -47,7 +47,7 @@ JEKYLL_ENV=production bundle exec jekyll build \
 cd ${WORKING_DIR}/build
 
 # Check if deploy on the same repository branch
-source "${SCRIPT_DIR}/providers/github.sh"
+source "providers/github.sh"
 fi
 
 exit $?
