@@ -14,12 +14,6 @@ RUN gem install bundler
 # debug
 RUN bundle version
 
-# Installing imagemagick and RMagick - required for jekyll_picture_tag
-RUN apt add --update pkgconfig imagemagick imagemagick-dev imagemagick-libs
-
-# debug
-RUN bundle version
-
 COPY LICENSE.txt README.md /
 
 COPY script /script
