@@ -1,9 +1,4 @@
-FROM ubuntu:latest
-
-LABEL version="0.0.1"
-LABEL repository="https://github.com/jeffreytse/jekyll-deploy-action"
-LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
-LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
+FROM ubuntu:lates
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y build-essential && \
