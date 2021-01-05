@@ -47,6 +47,11 @@ JEKYLL_ENV=production bundle exec jekyll build \
 cd ${WORKING_DIR}/build
 
 # Check if deploy on the same repository branch
-source "/github/workspace/providers/github.sh"
+if [[ "${PROVIDER}" == "github" ]]; then
+  source "${SCRIPT_DIR}/providers/github.sh"
+else
+  echo "${PROVIDER} is an unsupported provider."
+  exit 1
+fi
 
 exit $?
