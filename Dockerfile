@@ -13,6 +13,9 @@ RUN apk add --update tzdata
 # Installing imagemagick library
 RUN apk add --update pkgconfig imagemagick imagemagick-dev imagemagick-libs
 
+# Installing gsl library
+RUN apk add --update gsl-dev
+
 # debug
 RUN bundle version
 
