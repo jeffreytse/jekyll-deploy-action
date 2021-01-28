@@ -6,10 +6,11 @@ LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
 
 RUN apk add --no-cache git build-base
+
 # Allow for timezone setting in _config.yml
 RUN apk add --update tzdata
 
-# Installing imagemagick and RMagick - required for jekyll_picture_tag
+# Installing imagemagick library
 RUN apk add --update pkgconfig imagemagick imagemagick-dev imagemagick-libs
 
 # debug
