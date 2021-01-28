@@ -1,20 +1,26 @@
-FROM ruby:2.7-alpine
+FROM ruby:2.7-slim
 
-LABEL version="0.0.1"
+LABEL version="0.1.0"
 LABEL repository="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
 
-RUN apk add --no-cache git build-base
+# Update packages database
+RUN apt-get update
+
+RUN apt-get install -qq -y git-all build-essential
 
 # Allow for timezone setting in _config.yml
-RUN apk add --update tzdata
+RUN apt-get install -qq -y tzdata
 
 # Installing imagemagick library
-RUN apk add --update pkgconfig imagemagick imagemagick-dev imagemagick-libs
+RUN apt-get install -qq -y pkg-config libmagick++-dev
 
-# Installing gsl library
-RUN apk add --update gsl-dev
+# Installing gsl library for gsl
+RUN apt-get install -qq -y libgsl-dev
+
+# Installing atlas library for nmatrix
+RUN apt-get install -qq -y libatlas-base-dev
 
 # debug
 RUN bundle version
