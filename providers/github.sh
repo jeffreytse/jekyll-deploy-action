@@ -23,7 +23,7 @@ REMOTE_REPO="https://${TOKEN}@github.com/${REPOSITORY}.git" && \
   git add . && \
   git commit -m "jekyll build from Action ${GITHUB_SHA}" && \
   git push --force $REMOTE_REPO master:$BRANCH && \
-  rm -fr .git && \
+  fuser -k .git || rm -rf .git && \
   cd ..
 
 exit $?
