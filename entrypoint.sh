@@ -29,6 +29,19 @@ echo "Initial comptible bundler"
 ${SCRIPT_DIR}/script/cleanup_bundler.sh
 gem install bundler -v "${BUNDLER_VER}"
 
+# If the vendor/bundle folder is cached in a differnt OS (e.g. Ubuntu),
+# it would cause `jekyll build` failed, we should clean up the uncompatible
+# cache firstly.
+OS_NAME_FILE=${WORKING_DIR}/vendor/bundle/os-name
+os_name=$(cat /etc/os-release | grep ^NAME=)
+os_name=${os_name:6:-1}
+
+if [ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]; then
+  echo "Cleaning up incompatible bundler cache"
+  rm -rf ${WORKING_DIR}/vendor/bundle/*
+  echo $os_name > $OS_NAME_FILE
+fi
+
 echo "Starting bundle install"
 bundle config path ${WORKING_DIR}/vendor/bundle
 bundle install
