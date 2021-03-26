@@ -40,7 +40,6 @@ os_name=$(cat /etc/os-release | grep '^NAME=')
 os_name=${os_name:6:-1}
 
 if [ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]; then
-  echo $os_name $(cat $OS_NAME_FILE 2>/dev/null)
   echo "Cleaning up incompatible bundler cache"
   rm -rf ${BUNDLE_PATH}
   mkdir -p ${BUNDLE_PATH}
