@@ -16,6 +16,9 @@ JEKYLL_SRC=${INPUT_JEKYLL_SRC:=./}
 JEKYLL_CFG=${INPUT_JEKYLL_CFG:=./_config.yml}
 JEKYLL_BASEURL=${INPUT_JEKYLL_BASEURL:=}
 
+# Set default bundle path and cache
+BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
+
 echo "Starting the Jekyll Deploy Action"
 
 if [ -z "${TOKEN}" ]; then
@@ -32,13 +35,15 @@ gem install bundler -v "${BUNDLER_VER}"
 # If the vendor/bundle folder is cached in a differnt OS (e.g. Ubuntu),
 # it would cause `jekyll build` failed, we should clean up the uncompatible
 # cache firstly.
-OS_NAME_FILE=${WORKING_DIR}/vendor/bundle/os-name
-os_name=$(cat /etc/os-release | grep ^NAME=)
+OS_NAME_FILE=${BUNDLE_PATH}/os-name
+os_name=$(cat /etc/os-release | grep '^NAME=')
 os_name=${os_name:6:-1}
 
 if [ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]; then
+  echo $os_name $(cat $OS_NAME_FILE 2>/dev/null)
   echo "Cleaning up incompatible bundler cache"
-  rm -rf ${WORKING_DIR}/vendor/bundle/*
+  rm -rf ${BUNDLE_PATH}
+  mkdir -p ${BUNDLE_PATH}
   echo $os_name > $OS_NAME_FILE
 fi
 
