@@ -17,6 +17,9 @@ RUN apt-get install -qq -y tzdata
 # Installing imagemagick library
 RUN apt-get install -qq -y pkg-config libmagick++-dev
 
+# Installing libvips library
+RUN apt-get install -qq -y libvips-dev
+
 # Installing gsl and atlas libraries
 RUN apt-get install -qq -y libgsl-dev libatlas-base-dev
 
