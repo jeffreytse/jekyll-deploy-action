@@ -59,7 +59,7 @@
 
 ## ✨ Story
 
-As we known, GitHub Pages runs in `safe` mode and only allows [a set of whitelisted plugins](https://pages.github.com/versions/). To use the gem in GitHub Pages, you need to build locally or use CI (e.g. [travis](https://travis-ci.org/), [github workflow](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow)) and deploy to your `gh-pages` branch.
+As we known, GitHub Pages runs in `safe` mode and a [set of allow-listed plugins](https://pages.github.com/versions/). To use the gem in GitHub Pages, you need to build locally or use CI (e.g. [travis](https://travis-ci.org/), [github workflow](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow)) and deploy to your `gh-pages` branch.
 
 **Therefore, if you want to make Jekyll site run as if it were local, such as let
 the custom plugins work properly, this action can be very useful for you,
