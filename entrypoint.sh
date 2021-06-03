@@ -8,9 +8,9 @@ WORKING_DIR=${PWD}
 # Initial default value
 PROVIDER=${INPUT_PROVIDER:=github}
 TOKEN=${INPUT_TOKEN}
-ACTOR=${INPUT_ACTOR:=${GITHUB_ACTOR}}
-REPOSITORY=${INPUT_REPOSITORY:=${GITHUB_REPOSITORY}}
-BRANCH=${INPUT_BRANCH:=gh-pages}
+ACTOR=${INPUT_ACTOR}
+REPOSITORY=${INPUT_REPOSITORY}
+BRANCH=${INPUT_BRANCH}
 BUNDLER_VER=${INPUT_BUNDLER_VER:=>=0}
 JEKYLL_SRC=${INPUT_JEKYLL_SRC:=./}
 JEKYLL_CFG=${INPUT_JEKYLL_CFG:=./_config.yml}
@@ -24,6 +24,19 @@ echo "Starting the Jekyll Deploy Action"
 if [ -z "${TOKEN}" ]; then
   echo "Please set the TOKEN environment variable."
   exit 1
+fi
+
+# Check parameters and assign default values
+if [[ "${PROVIDER}" == "github" ]]; then
+  : ${ACTOR:=${GITHUB_ACTOR}}
+  : ${REPOSITORY:=${GITHUB_REPOSITORY}}
+  : ${BRANCH:=gh-pages}
+
+  # Check if repository is available
+  if ! echo "${REPOSITORY}" | grep -Eq ".+/.+"; then
+    echo "The repository ${REPOSITORY} doesn't match the pattern <author>/<repos>"
+    exit 1
+  fi
 fi
 
 cd ${JEKYLL_SRC}
