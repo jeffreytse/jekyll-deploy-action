@@ -9,7 +9,7 @@ LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
 RUN apt-get update
 
 # Installing git package
-RUN apt-get install -qq -y git-all
+RUN apt-get install -qq -y git
 
 # Allow for timezone setting in _config.yml
 RUN apt-get install -qq -y tzdata
