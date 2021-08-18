@@ -60,6 +60,7 @@ if [ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]; then
 fi
 
 echo "Starting bundle install"
+bundle config cach_all true
 bundle config path ${WORKING_DIR}/vendor/bundle
 bundle install
 
