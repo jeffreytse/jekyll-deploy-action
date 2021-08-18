@@ -1,4 +1,4 @@
-FROM ruby:2.7
+FROM archlinux:base-devel
 
 LABEL version="0.1.0"
 LABEL repository="https://github.com/jeffreytse/jekyll-deploy-action"
@@ -6,25 +6,19 @@ LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
 
 # Update packages database
-RUN apt-get update
+RUN pacman -Syu --noconfirm
 
 # Installing git package
-RUN apt-get install -qq -y git
+RUN pacman -S --noconfirm git
 
-# Allow for timezone setting in _config.yml
-RUN apt-get install -qq -y tzdata
+# Installing ruby libraries
+RUN pacman -S --noconfirm ruby2.7 ruby-bundler
 
-# Installing imagemagick library
-RUN apt-get install -qq -y pkg-config libmagick++-dev
-
-# Installing libvips library
-RUN apt-get install -qq -y libvips-dev
-
-# Installing gsl and atlas libraries
-RUN apt-get install -qq -y libgsl-dev libatlas-base-dev
+# Setting default ruby version
+RUN cp /usr/bin/ruby-2.7 /usr/bin/ruby
 
 # debug
-RUN bundle version
+RUN ruby -v && bundle version
 
 COPY LICENSE.txt README.md /
 
