@@ -32,6 +32,9 @@ inputs:
   jekyll_baseurl:
     description: 'The Jekyll website baseurl'
     required: false
+  pre_build_commands:
+    description: 'The pre-build commands'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
