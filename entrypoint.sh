@@ -40,6 +40,10 @@ if [[ "${PROVIDER}" == "github" ]]; then
   fi
 fi
 
+# Initialize environment
+echo "Initialize environment"
+${SCRIPT_DIR}/script/init_environment.sh
+
 cd ${JEKYLL_SRC}
 
 # Check and execute pre_build_commands commands
