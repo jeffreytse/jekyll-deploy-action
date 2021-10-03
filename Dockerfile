@@ -1,18 +1,9 @@
-FROM ubuntu:latest
+FROM archlinux:base-devel
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y build-essential && \
-  apt-get install -y git && \
-  apt-get install -y imagemagick && \
-  apt-get install -y libmagickwand-dev && \
-  apt-get install -y ruby && \
-  apt-get install -y ruby-dev
-
-RUN gem install rmagick
-RUN gem install bundler
-
-# debug
-RUN bundle version
+LABEL version="0.1.0"
+LABEL repository="https://github.com/jeffreytse/jekyll-deploy-action"
+LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
+LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
 
 COPY LICENSE.txt README.md /
 
