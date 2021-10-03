@@ -8,13 +8,17 @@ WORKING_DIR=${PWD}
 # Initial default value
 PROVIDER=${INPUT_PROVIDER:=github}
 TOKEN=${INPUT_TOKEN}
-ACTOR=${INPUT_ACTOR:=${GITHUB_ACTOR}}
-REPOSITORY=${INPUT_REPOSITORY:=${GITHUB_REPOSITORY}}
-BRANCH=${INPUT_BRANCH:=gh-pages}
+ACTOR=${INPUT_ACTOR}
+REPOSITORY=${INPUT_REPOSITORY}
+BRANCH=${INPUT_BRANCH}
 BUNDLER_VER=${INPUT_BUNDLER_VER:=>=0}
 JEKYLL_SRC=${INPUT_JEKYLL_SRC:=./}
 JEKYLL_CFG=${INPUT_JEKYLL_CFG:=./_config.yml}
 JEKYLL_BASEURL=${INPUT_JEKYLL_BASEURL:=}
+PRE_BUILD_COMMANDS=${INPUT_PRE_BUILD_COMMANDS:=}
+
+# Set default bundle path and cache
+BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
 
 echo "Starting the Jekyll Deploy Action"
 
@@ -23,13 +27,51 @@ if [ -z "${TOKEN}" ]; then
   exit 1
 fi
 
+# Check parameters and assign default values
+if [[ "${PROVIDER}" == "github" ]]; then
+  : ${ACTOR:=${GITHUB_ACTOR}}
+  : ${REPOSITORY:=${GITHUB_REPOSITORY}}
+  : ${BRANCH:=gh-pages}
+
+  # Check if repository is available
+  if ! echo "${REPOSITORY}" | grep -Eq ".+/.+"; then
+    echo "The repository ${REPOSITORY} doesn't match the pattern <author>/<repos>"
+    exit 1
+  fi
+fi
+
+# Initialize environment
+echo "Initialize environment"
+${SCRIPT_DIR}/script/init_environment.sh
+
 cd ${JEKYLL_SRC}
+
+# Check and execute pre_build_commands commands
+if [[ ${PRE_BUILD_COMMANDS} ]]; then
+  echo "Executing pre-build commands"
+  eval "${PRE_BUILD_COMMANDS}"
+fi
 
 echo "Initial comptible bundler"
 ${SCRIPT_DIR}/script/cleanup_bundler.sh
 gem install bundler -v "${BUNDLER_VER}"
 
+# If the vendor/bundle folder is cached in a differnt OS (e.g. Ubuntu),
+# it would cause `jekyll build` failed, we should clean up the uncompatible
+# cache firstly.
+OS_NAME_FILE=${BUNDLE_PATH}/os-name
+os_name=$(cat /etc/os-release | grep '^NAME=')
+os_name=${os_name:6:-1}
+
+if [ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]; then
+  echo "Cleaning up incompatible bundler cache"
+  rm -rf ${BUNDLE_PATH}
+  mkdir -p ${BUNDLE_PATH}
+  echo $os_name > $OS_NAME_FILE
+fi
+
 echo "Starting bundle install"
+bundle config cach_all true
 bundle config path ${WORKING_DIR}/vendor/bundle
 bundle install
 
