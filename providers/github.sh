@@ -16,7 +16,7 @@ touch .nojekyll
 echo "Deploying to ${REPOSITORY} on branch ${BRANCH}"
 echo "Deploying to https://${TOKEN}@github.com/${REPOSITORY}.git"
 
-REMOTE_REPO="https://${TOKEN}@github.com/${REPOSITORY}.git" && \
+REMOTE_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git" && \
   git init && \
   git config user.name "${ACTOR}" && \
   git config user.email "${ACTOR}@users.noreply.github.com" && \

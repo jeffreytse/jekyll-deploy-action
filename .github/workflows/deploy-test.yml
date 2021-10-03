@@ -19,5 +19,5 @@ jobs:
     - uses: ./
       with:
         provider: 'github'
-        token: ${{ secrets.GH_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         jekyll_src: './test_site'
