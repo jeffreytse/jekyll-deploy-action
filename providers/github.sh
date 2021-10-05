@@ -14,9 +14,9 @@ touch .nojekyll
 [ -n "$INPUT_CNAME" ] && echo "$INPUT_CNAME" > CNAME
 
 echo "Deploying to ${REPOSITORY} on branch ${BRANCH}"
-echo "Deploying to https://${TOKEN}@github.com/${REPOSITORY}.git"
+echo "Deploying to https://${ACTOR}:${TOKEN}@github.com/${REPOSITORY}.git"
 
-REMOTE_REPO="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${REPOSITORY}.git" && \
+REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/${REPOSITORY}.git" && \
   git init && \
   git config user.name "${ACTOR}" && \
   git config user.email "${ACTOR}@users.noreply.github.com" && \
