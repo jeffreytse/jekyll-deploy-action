@@ -22,7 +22,7 @@ BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
 
 echo "Starting the Jekyll Deploy Action"
 
-if [ -z "${TOKEN}" ]; then
+if [[ -z "${TOKEN}" ]]; then
   echo "Please set the TOKEN environment variable."
   exit 1
 fi
@@ -63,7 +63,7 @@ OS_NAME_FILE=${BUNDLE_PATH}/os-name
 os_name=$(cat /etc/os-release | grep '^NAME=')
 os_name=${os_name:6:-1}
 
-if [ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]; then
+if [[ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]]; then
   echo "Cleaning up incompatible bundler cache"
   rm -rf ${BUNDLE_PATH}
   mkdir -p ${BUNDLE_PATH}
@@ -76,7 +76,7 @@ bundle config path ${WORKING_DIR}/vendor/bundle
 bundle install
 
 # Pre-handle Jekyll baseurl
-if [ -n "${JEKYLL_BASEURL-}" ]; then
+if [[ -n "${JEKYLL_BASEURL-}" ]]; then
   JEKYLL_BASEURL="--baseurl ${JEKYLL_BASEURL}"
 fi
 
