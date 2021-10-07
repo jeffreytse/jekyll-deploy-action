@@ -96,7 +96,7 @@ jobs:
       - uses: jeffreytse/jekyll-deploy-action@v0.3.0
         with:
           provider: 'github'
-          token: ${{ secrets.GH_TOKEN }} # It's your Personal Access Token(PAT)
+          token: ${{ secrets.GITHUB_TOKEN }} # It's your Personal Access Token(PAT)
           repository: ''             # Default is current repository
           branch: 'gh-pages'         # Default is gh-pages for github provider
           jekyll_src: './'           # Default is root directory
@@ -108,7 +108,9 @@ jobs:
           pre_build_commands: ''     # Installing additional dependencies (Arch Linux)
 ```
 
-To schedule a workflow, you can use the POSIX cron syntax in your workflow file. The shortest interval you can run scheduled workflows is once every 5 minutes. For example, this workflow is triggered every hour.
+To schedule a workflow, you can use the POSIX cron syntax in your workflow file.
+The shortest interval you can run scheduled workflows is once every 5 minutes.
+For example, this workflow is triggered every hour.
 
 ```yml
 on:
@@ -116,9 +118,17 @@ on:
     - cron:  '0 * * * *'
 ```
 
-After this, we should provide permissions for this action to push to the `gh-pages` branch:
+At the start of each workflow run, GitHub automatically creates a unique
+`GITHUB_TOKEN` secret to use in your workflow. You can use the `GITHUB_TOKEN`
+to authenticate in a workflow run. You can use the `GITHUB_TOKEN` by using the
+standard syntax for referencing secrets: `${{ secrets.GITHUB_TOKEN }}`. For
+more information, you can see [here](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
 
-- Create a [Personal Token](https://github.com/settings/tokens) with repos permissions and copy the value.
+If you need a token that requires permissions that aren't available in the
+`GITHUB_TOKEN`, you can create a Personal Access Token (PAT), and set it as
+a secret in your repository for this action to push to the `gh-pages` branch:
+
+- Create a [Personal Access Token](https://github.com/settings/tokens) with custom permissions and copy the value.
 - Go to your repository’s Settings and then switch to the Secrets tab.
 - Create a token named `GH_TOKEN` (important) using the value copied.
 
