@@ -38,6 +38,9 @@ if [[ "${PROVIDER}" == "github" ]]; then
     echo "The repository ${REPOSITORY} doesn't match the pattern <author>/<repos>"
     exit 1
   fi
+
+  # Fix Github API metadata warnings
+  export JEKYLL_GITHUB_TOKEN=${TOKEN}
 fi
 
 # Initialize environment
