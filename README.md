@@ -82,7 +82,7 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Use GitHub Actions' cache to cache dependencies on servers
       - uses: actions/cache@v2
