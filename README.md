@@ -146,6 +146,16 @@ git push origin gh-pages
 
 **💡 Tip:** The `gh-pages` branch is only for the site static files and the `master` branch is for source code.
 
+If you use [jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) plugin, you can configure the checkout action to fetch all commit history so that plugin could use the last Git commit date to determine a page's last modified date.
+
+```yaml
+- uses: actions/checkout@v3
+  with:
+    # The checkout action doesn't provide a way to get all commit history for a single branch
+    # So we use the magic number 2147483647 here which means infinite depth for git fetch
+    # See https://github.com/actions/checkout/issues/520, https://stackoverflow.com/a/6802238
+    fetch-depth: 2147483647
+```
 
 ## 🌱 Credits
 
