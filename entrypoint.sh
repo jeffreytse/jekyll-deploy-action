@@ -49,10 +49,6 @@ ${SCRIPT_DIR}/script/init_environment.sh
 
 cd ${JEKYLL_SRC}
 
-# Restore modification time (mtime) of git files
-echo "Restore modification time of all git files"
-${SCRIPT_DIR}/script/restore_mtime.sh
-
 # Check and execute pre_build_commands commands
 if [[ ${PRE_BUILD_COMMANDS} ]]; then
   echo "Executing pre-build commands"
