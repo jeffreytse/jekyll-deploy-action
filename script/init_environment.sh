@@ -3,8 +3,8 @@
 # Update packages database
 pacman -Syu --noconfirm
 
-# Installing git package
-pacman -S --noconfirm git
+# Installing git and python packages
+pacman -S --noconfirm git python
 
 # Installing ruby libraries
 pacman -S --noconfirm ruby2.7 ruby-bundler
