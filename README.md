@@ -63,7 +63,7 @@ As we known, GitHub Pages runs in `safe` mode and a [set of allow-listed plugins
 
 **Therefore, if you want to make Jekyll site run as if it were local, such as let
 the custom plugins work properly, this action can be very useful for you,
-beacause it's really convenient to build and deploy the Jekyll site to Github
+because it's really convenient to build and deploy the Jekyll site to Github
 Pages.**
 
 ## 📚 Usage
