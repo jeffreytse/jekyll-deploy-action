@@ -109,12 +109,14 @@ build_jekyll || {
 
 cd ${WORKING_DIR}/build
 
-# Check if deploy on the same repository branch
-if [[ "${PROVIDER}" == "github" ]]; then
-  source "${SCRIPT_DIR}/providers/github.sh"
-else
-  echo "${PROVIDER} is an unsupported provider."
-  exit 1
+if [[ ! -z "${INPUT_SKIP_DEPLOY}" ]]; then
+  # Check if deploy on the same repository branch
+  if [[ "${PROVIDER}" == "github" ]]; then
+    source "${SCRIPT_DIR}/providers/github.sh"
+  else
+    echo "${PROVIDER} is an unsupported provider."
+    exit 1
+  fi
 fi
 
 exit $?

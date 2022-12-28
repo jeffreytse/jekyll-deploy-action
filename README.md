@@ -106,6 +106,7 @@ jobs:
           cname: ''                  # Default is to not use a cname
           actor: ''                  # Default is the GITHUB_ACTOR
           pre_build_commands: ''     # Installing additional dependencies (Arch Linux)
+          skip_deploy: ''            # Skip the Deploy Step - only build
 ```
 
 To schedule a workflow, you can use the POSIX cron syntax in your workflow file.
