@@ -109,7 +109,7 @@ build_jekyll || {
 
 cd ${WORKING_DIR}/build
 
-if [[ ! -z "${INPUT_SKIP_DEPLOY}" ]]; then
+if [[ -z "${INPUT_SKIP_DEPLOY}" ]]; then
   # Check if deploy on the same repository branch
   if [[ "${PROVIDER}" == "github" ]]; then
     source "${SCRIPT_DIR}/providers/github.sh"
