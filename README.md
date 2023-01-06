@@ -85,7 +85,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Use GitHub Actions' cache to cache dependencies on servers
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
@@ -145,6 +145,8 @@ git push origin gh-pages
 ```
 
 **💡 Tip:** The `gh-pages` branch is only for the site static files and the `master` branch is for source code.
+
+## ✨ FAQ
 
 If you use [jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) plugin, you can configure the checkout action to fetch all commit history so that plugin could use the last Git commit date to determine a page's last modified date.
 
