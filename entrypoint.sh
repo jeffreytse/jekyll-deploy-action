@@ -55,6 +55,20 @@ if [[ ${PRE_BUILD_COMMANDS} ]]; then
   eval "${PRE_BUILD_COMMANDS}"
 fi
 
+echo "Check bundler version from Gemfile.lock"
+GEMFILE_LOCK_DIR="${PWD}"
+while [[ "${GEMFILE_LOCK_DIR}" != "/" ]] &&
+  [[ ! -f "${GEMFILE_LOCK_DIR}/Gemfile.lock" ]]; do
+  GEMFILE_LOCK_DIR="$(dirname "${GEMFILE_LOCK_DIR}")"
+done
+
+if [[ -f "${GEMFILE_LOCK_DIR}/Gemfile.lock" ]]; then
+  BUNDLER_VER="$( \
+    grep -A 1 'BUNDLED WITH' "${GEMFILE_LOCK_DIR}/Gemfile.lock" | \
+    tail -n 1 | xargs)"
+  echo "Bundler version ${BUNDLER_VER} is required by your Gemfile.lock!"
+fi
+
 echo "Initial comptible bundler"
 ${SCRIPT_DIR}/script/cleanup_bundler.sh
 gem install bundler -v "${BUNDLER_VER}"
