@@ -159,6 +159,23 @@ If you use [jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-m
     fetch-depth: 2147483647
 ```
 
+If your site building needs some specific environments, here are some recipes
+for you:
+
+```yaml
+# NodeJS
+pre_build_commands: pacman -S --noconfirm nodejs npm
+
+# Python
+pre_build_commands: pacman -S --noconfirm python
+
+# Gem RMagick
+pre_build_commands: pacman -S --noconfirm imagemagick
+
+# Jekyll-Picture-Tag
+pre_build_commands: pacman -S --noconfirm libvips lcms2 openjpeg2 libpng libwebp libheif imagemagick openslide libjxl poppler-glib
+```
+
 ## 🌱 Credits
 
 - [Jekyll](https://github.com/jekyll/jekyll) - A blog-aware static site generator in Ruby.
