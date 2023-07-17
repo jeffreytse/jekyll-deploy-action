@@ -136,8 +136,8 @@ cd ${WORKING_DIR}/build
 
 # Check if deploy on the same repository branch
 PROVIDER_EXIT_CODE=0
-if [[ "${PROVIDER}" == "github" ]]; then
-  source "${SCRIPT_DIR}/providers/github.sh"
+if [[ -f "${SCRIPT_DIR}/providers/${PROVIDER}.sh" ]]; then
+  source "${SCRIPT_DIR}/providers/${PROVIDER}.sh"
 else
   echo "${PROVIDER} is an unsupported provider."
   PROVIDER_EXIT_CODE=1
