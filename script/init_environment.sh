@@ -6,6 +6,11 @@ pacman -Syu --noconfirm
 # Installing git package
 pacman -S --noconfirm git
 
+# Installing openssh package
+if [[ -n "${SSH_PRIVATE_KEY}" ]]; then
+  pacman -S --noconfirm openssh
+fi
+
 # Installing ruby libraries
 pacman -S --noconfirm ruby2.7 ruby-bundler
 

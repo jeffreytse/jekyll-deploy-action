@@ -8,6 +8,7 @@ WORKING_DIR=${PWD}
 # Initial default value
 PROVIDER=${INPUT_PROVIDER:=github}
 TOKEN=${INPUT_TOKEN}
+SSH_PRIVATE_KEY=${INPUT_SSH_PRIVATE_KEY}
 ACTOR=${INPUT_ACTOR}
 REPOSITORY=${INPUT_REPOSITORY}
 BRANCH=${INPUT_BRANCH}
@@ -121,14 +122,31 @@ build_jekyll || {
   build_jekyll
 }
 
+# Pre-handle SSH private key
+if [[ -n "${SSH_PRIVATE_KEY}" ]]; then
+  echo "Pre-handle SSH private key file"
+  SSH_PRIVATE_KEY_PATH=$(mktemp /tmp/ssh-priv-key.XXXXXX)
+  echo "${SSH_PRIVATE_KEY}" > ${SSH_PRIVATE_KEY_PATH}
+  # To prevent from permissions are too open issue, the key can be
+  # only readable by self
+  chmod 400 ${SSH_PRIVATE_KEY_PATH}
+fi
+
 cd ${WORKING_DIR}/build
 
 # Check if deploy on the same repository branch
+PROVIDER_EXIT_CODE=0
 if [[ "${PROVIDER}" == "github" ]]; then
   source "${SCRIPT_DIR}/providers/github.sh"
 else
   echo "${PROVIDER} is an unsupported provider."
-  exit 1
+  PROVIDER_EXIT_CODE=1
 fi
 
-exit $?
+# Post-handle SSH private key
+if [[ -n "${SSH_PRIVATE_KEY}" ]]; then
+  echo "Post-handle SSH private key file"
+  rm -f ${SSH_PRIVATE_KEY_PATH}
+fi
+
+exit ${PROVIDER_EXIT_CODE}

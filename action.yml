@@ -8,6 +8,9 @@ inputs:
   token:
     description: 'The deploy token'
     required: false
+  ssh_private_key:
+    description: 'The SSH private key for using SSH approach'
+    required: false
   repository:
     description: 'The deploy repository'
     required: false
