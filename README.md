@@ -93,10 +93,12 @@ jobs:
             ${{ runner.os }}-gems-
 
       # Use GitHub Deploy Action to build and deploy to Github
-      - uses: jeffreytse/jekyll-deploy-action@v0.4.0
+      # For latest version: `jeffreytse/jekyll-deploy-action@master`
+      - uses: jeffreytse/jekyll-deploy-action@v0.5.0
         with:
-          provider: 'github'
+          provider: 'github'         # Default is github
           token: ${{ secrets.GITHUB_TOKEN }} # It's your Personal Access Token(PAT)
+          ssh_private_key: ''        # It's your SSH private key (SSH approach)
           repository: ''             # Default is current repository
           branch: 'gh-pages'         # Default is gh-pages for github provider
           jekyll_src: './'           # Default is root directory
@@ -107,6 +109,13 @@ jobs:
           actor: ''                  # Default is the GITHUB_ACTOR
           pre_build_commands: ''     # Installing additional dependencies (Arch Linux)
 ```
+
+Now this action supports the following providers:
+
+- [x] `github`: To publish the site to GitHub.
+- [x] `test`: To check if build passes on pull requests without publishing the site.
+- [ ] `ssh`: To publish the site into any server which supports SSH protocol.
+- ...
 
 To schedule a workflow, you can use the POSIX cron syntax in your workflow file.
 The shortest interval you can run scheduled workflows is once every 5 minutes.
@@ -175,6 +184,16 @@ pre_build_commands: pacman -S --noconfirm imagemagick
 # Jekyll-Picture-Tag
 pre_build_commands: pacman -S --noconfirm libvips lcms2 openjpeg2 libpng libwebp libheif imagemagick openslide libjxl poppler-glib
 ```
+
+If you prefer to deploy your site in SSH approach for better stability, you can
+also creates a unique `SSH_PRIVATE_KEY` secret to use in your workflow:
+
+```yml
+ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+```
+
+__Note:__ SSH approach has higher priority than HTTP approach when you provide
+both at the same time.
 
 ## 🌱 Credits
 
