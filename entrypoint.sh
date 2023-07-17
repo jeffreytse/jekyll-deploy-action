@@ -8,7 +8,7 @@ WORKING_DIR=${PWD}
 # Initial default value
 PROVIDER=${INPUT_PROVIDER:=github}
 TOKEN=${INPUT_TOKEN}
-SSH_PRIVATE_KEY=${INPUT_SSH_PRIVATE_KEY}
+SSH_PRIVATE_KEY=${INPUT_SSH_PRIVATE_KEY:=}
 ACTOR=${INPUT_ACTOR}
 REPOSITORY=${INPUT_REPOSITORY}
 BRANCH=${INPUT_BRANCH}
@@ -23,8 +23,8 @@ BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
 
 echo "Starting the Jekyll Deploy Action"
 
-if [[ -z "${TOKEN}" ]]; then
-  echo "Please set the TOKEN environment variable."
+if [[ -z "${TOKEN}" && -z "${SSH_PRIVATE_KEY}" ]]; then
+  echo "Please set the TOKEN or SSH_PRIVATE_KEY environment variable."
   exit 1
 fi
 
@@ -46,7 +46,7 @@ fi
 
 # Initialize environment
 echo "Initialize environment"
-${SCRIPT_DIR}/script/init_environment.sh
+source ${SCRIPT_DIR}/script/init_environment.sh
 
 cd ${JEKYLL_SRC}
 
