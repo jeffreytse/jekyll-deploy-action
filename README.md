@@ -94,7 +94,7 @@ jobs:
 
       # Use GitHub Deploy Action to build and deploy to Github
       # For latest version: `jeffreytse/jekyll-deploy-action@master`
-      - uses: jeffreytse/jekyll-deploy-action@v0.5.0
+      - uses: jeffreytse/jekyll-deploy-action@v0.5.1
         with:
           provider: 'github'         # Default is github
           token: ${{ secrets.GITHUB_TOKEN }} # It's your Personal Access Token(PAT)
@@ -104,7 +104,7 @@ jobs:
           jekyll_src: './'           # Default is root directory
           jekyll_cfg: '_config.yml'  # Default is _config.yml
           jekyll_baseurl: ''         # Default is according to _config.yml
-          bundler_ver: '~>2.4.0'     # Default is latest bundler version
+          bundler_ver: ''            # Default is compatible bundler version (~>2.4.0)
           cname: ''                  # Default is to not use a cname
           actor: ''                  # Default is the GITHUB_ACTOR
           pre_build_commands: ''     # Installing additional dependencies (Arch Linux)
