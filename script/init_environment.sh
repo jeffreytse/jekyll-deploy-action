@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# https://www.reddit.com/r/archlinux/comments/ugcmtn/unable_to_fix_gpg_error_when_upgrading_packages/
+pacman-key --refresh-keys
+
 # Update packages database
 pacman -Syu --noconfirm
 
