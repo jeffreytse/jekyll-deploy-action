@@ -12,10 +12,12 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/cache@v3
       with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ secrets.CACHE_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
+        path: |
+          .asdf/**
+          vendor/bundle
+        key: ${{ runner.os }}-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles('**/cache.key') }}
         restore-keys: |
-          ${{ runner.os }}-gems-
+          ${{ runner.os }}-cache-
     - uses: ./
       with:
         provider: 'github'
