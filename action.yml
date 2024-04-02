@@ -23,6 +23,9 @@ inputs:
   cname:
     description: 'The cname to use for the site'
     required: false
+  ruby_ver:
+    description: 'The Ruby version'
+    required: false
   bundler_ver:
     description: 'The Bundler version'
     required: false
