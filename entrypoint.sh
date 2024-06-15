@@ -24,8 +24,7 @@ BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
 
 echo "Starting the Jekyll Deploy Action"
 
-echo "the test env var is"
-echo $JEKYLL_MAIL
+
 
 if [[ -z "${TOKEN}" && -z "${SSH_PRIVATE_KEY}" ]]; then
   echo "Please set the TOKEN or SSH_PRIVATE_KEY environment variable."
@@ -100,10 +99,14 @@ if [[ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]]; then
   echo $os_name > $OS_NAME_FILE
 fi
 
+echo "***Replace adddress**"
+sed -i 's/example@example.com/'$JEKYLL_MAIL'/g' contact.html
+
 echo "Starting bundle install"
 bundle config cach_all true
 bundle config path $BUNDLE_PATH
 bundle install
+
 
 # Pre-handle Jekyll baseurl
 if [[ -n "${JEKYLL_BASEURL-}" ]]; then
