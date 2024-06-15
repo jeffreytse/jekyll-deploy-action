@@ -100,7 +100,7 @@ if [[ "$os_name" != "$(cat $OS_NAME_FILE 2>/dev/null)" ]]; then
 fi
 
 echo "***Replace adddress**"
-sed -i 's/example@example.com/'$JEKYLL_MAIL'/g' contact.html
+sed -i 's/example@example.com/'$JEKYLL_MAIL'/g' $WORKINGDIR/contact.html
 
 echo "Starting bundle install"
 bundle config cach_all true
