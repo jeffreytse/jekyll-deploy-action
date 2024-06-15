@@ -18,11 +18,14 @@ JEKYLL_SRC=${INPUT_JEKYLL_SRC:=./}
 JEKYLL_CFG=${INPUT_JEKYLL_CFG:=./_config.yml}
 JEKYLL_BASEURL=${INPUT_JEKYLL_BASEURL:=}
 PRE_BUILD_COMMANDS=${INPUT_PRE_BUILD_COMMANDS:=}
-
+JEKYLL_MAIL=${INPUT_JEKYLL_MAIL}
 # Set default bundle path and cache
 BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
 
 echo "Starting the Jekyll Deploy Action"
+
+echo "the test env var is"
+echo $JEKYLL_MAIL
 
 if [[ -z "${TOKEN}" && -z "${SSH_PRIVATE_KEY}" ]]; then
   echo "Please set the TOKEN or SSH_PRIVATE_KEY environment variable."
