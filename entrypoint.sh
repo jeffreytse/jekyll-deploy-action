@@ -24,10 +24,13 @@ BUNDLE_PATH=${WORKING_DIR}/vendor/bundle
 
 echo "Starting the Jekyll Deploy Action"
 
-if [[ -z "${TOKEN}" && -z "${SSH_PRIVATE_KEY}" ]]; then
-  echo "Please set the TOKEN or SSH_PRIVATE_KEY environment variable."
-  exit 1
-fi
+if [[ "${PROVIDER}" != "test" ]]; then
+  # Check if the token or SSH private key is set
+  if [[ -z "${TOKEN}" && -z "${SSH_PRIVATE_KEY}" ]]; then
+    echo "Please set the TOKEN or SSH_PRIVATE_KEY environment variable."
+    exit 1
+  fi
+if
 
 # Check parameters and assign default values
 if [[ "${PROVIDER}" == "github" ]]; then
