@@ -30,7 +30,7 @@ if [[ "${PROVIDER}" != "test" ]]; then
     echo "Please set the TOKEN or SSH_PRIVATE_KEY environment variable."
     exit 1
   fi
-if
+fi
 
 # Check parameters and assign default values
 if [[ "${PROVIDER}" == "github" ]]; then
