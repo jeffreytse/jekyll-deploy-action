@@ -1,9 +1,11 @@
-FROM archlinux:base-devel
+FROM alpine:latest
 
 LABEL version="0.1.0"
 LABEL repository="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL homepage="https://github.com/jeffreytse/jekyll-deploy-action"
 LABEL maintainer="Jeffrey Tse <jeffreytse.mail@gmail.com>"
+
+RUN apk update && apk add --no-cache bash perl gcc make musl-dev zlib-dev openssl-dev g++
 
 COPY LICENSE.txt README.md /
 

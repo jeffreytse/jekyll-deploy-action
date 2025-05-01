@@ -176,16 +176,16 @@ for you:
 
 ```yaml
 # NodeJS
-pre_build_commands: pacman -S --noconfirm nodejs npm
+pre_build_commands: apk add nodejs npm
 
 # Python
-pre_build_commands: pacman -S --noconfirm python
+pre_build_commands: apk add python
 
 # Gem RMagick
-pre_build_commands: pacman -S --noconfirm imagemagick
+pre_build_commands: apk add imagemagick
 
 # Jekyll-Picture-Tag
-pre_build_commands: pacman -S --noconfirm libvips lcms2 openjpeg2 libpng libwebp libheif imagemagick openslide libjxl poppler-glib
+pre_build_commands: apk add vips lcms2 openjpeg libpng libwebp libheif imagemagick openslide libjxl poppler-glib
 ```
 
 If you prefer to deploy your site in SSH approach for better stability, you can

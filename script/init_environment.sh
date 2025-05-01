@@ -1,18 +1,14 @@
 #!/bin/bash
 
-# Generate a default secret key
-# To prevent archlinux-keyring from no secret key available to sign with
-pacman-key --init
-
 # Update packages database
-pacman -Syu --noconfirm
+apk update
 
 # Installing git package
-pacman -S --noconfirm git
+apk add git
 
 # Installing openssh package
 if [[ -n "${SSH_PRIVATE_KEY}" ]]; then
-  pacman -S --noconfirm openssh
+  apk add openssh
 fi
 
 # Install asdf-vm for tools' version management
@@ -29,7 +25,7 @@ source ${ASDF_HOME}/asdf.sh
 ln -s ${ASDF_HOME} ${HOME}/.asdf
 
 # Install ruby environment
-pacman -S --noconfirm libyaml
+apk add yaml-dev
 
 if ! asdf list ruby ${RUBY_VER} &>/dev/null; then
   # Clean up ruby environments avoiding unnecessary cache
