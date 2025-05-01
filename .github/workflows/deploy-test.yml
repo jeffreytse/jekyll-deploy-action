@@ -20,6 +20,6 @@ jobs:
           ${{ runner.os }}-cache-
     - uses: ./
       with:
-        provider: 'test'
+        provider: 'github'
         token: ${{ secrets.GITHUB_TOKEN }}
         jekyll_src: './test_site'
