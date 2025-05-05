@@ -31,6 +31,11 @@ ln -s ${ASDF_HOME} ${HOME}/.asdf
 # Install ruby environment
 pacman -S --noconfirm libyaml
 
+# Manually specify the language version for C compilation for ruby-build
+# to avoid error when building ruby and building ruby extensions.
+# C23 by default in GCC15: https://gcc.gnu.org/gcc-15/changes.html#c
+export RUBY_CFLAGS="-std=gnu17"
+
 if ! asdf list ruby ${RUBY_VER} &>/dev/null; then
   # Clean up ruby environments avoiding unnecessary cache
   rm -rf ${ASDF_HOME}/installs/ruby
