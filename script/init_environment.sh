@@ -11,10 +11,6 @@ pre-flight() {
   # Installing git package
   pacman -S --noconfirm git
 
-  # Installing ca-certificates package to avoid SSL issues
-  pacman -S --noconfirm ca-certificates
-  update-ca-trust
-
   # Installing openssh package
   if [[ -n "${SSH_PRIVATE_KEY}" ]]; then
     pacman -S --noconfirm openssh
@@ -41,7 +37,7 @@ pre-flight() {
   git config --global --add safe.directory "*"
 }
 
-init_ruby() {
+init-ruby() {
   # Manually specify the language version for C compilation for ruby-build
   # to avoid error when building ruby and building ruby extensions.
   # C23 by default in GCC15: https://gcc.gnu.org/gcc-15/changes.html#c
@@ -60,4 +56,4 @@ init_ruby() {
   ruby -v && bundle version
 }
 
-pre-flight && init_ruby
+pre-flight && init-ruby
